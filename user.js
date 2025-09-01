@@ -1,0 +1,58 @@
+//Import the built-in HTTP module
+const http = require('http');
+// Import the File System module for writing data to a file
+const fs = require('fs');
+//Create an HTTP server and define how it handles requests
+const server = http.createServer((req,res) => {
+
+  // Log request details (URL, Method, Headers) for debugging
+console.log(req.url , req.method, req.headers);
+// ✅ Route 1: Handle Home Page (GET request to '/')
+if(req.url === '/'){
+
+  // Set response type as HTML
+    res.setHeader('Content-Type','text/html');
+
+    // Write HTML response for the form page
+  res.write('<html lang="en">');
+  res.write('<head><title>complete coding</title></head>');
+   res.write('<body><h1>Enter your details</h1>');
+
+   // Form that sends data to '/submit-details' via POST method
+   res.write('<form action="/submit-details" method="POST">');
+   res.write('<input type="text" name="username" placeholder="Enter your name"><br>');
+
+   // Gender options (radio buttons)
+   res.write('<label for="male">male</label>')
+   res.write('<input type="radio" id="male" name="gender" value="male"/>');
+   res.write('<label for="female">female</label>');
+   res.write('<input type="radio" id="female" name="gender" value="female">');
+
+    // Submit button
+   res.write('<br> <input type="submit" value="submit">');
+    res.write('</form>');
+    res.write('</body>');
+  res.write('</html>');
+  return res.end(); // End the response after sending the form
+
+   // ✅ Route 2: Handle Form Submission (POST request to '/submit-details')
+}  else if(req.url.toLowerCase() === "/submit-details" && req.method == "POST"){
+
+   // Write static data to a file (you can replace with actual form data later)
+  fs.writeFileSync('user.text', 'vivek kumar');
+  res.statusCode = 302;  // Redirect user back to the home page after submission
+  res.setHeader('Location', '/');
+}
+ res.setHeader('Content-Type','text-html');
+ res.write('<html>');
+ res.write('<body><title>coplete codind</title></body>');
+ res.write('<body><h1>like / share</h1></body>')
+ res.write('</html>');
+ res.end();
+});
+   // Define the port number
+  const PORT = 3000;
+  // Start the server and listen on the specified port
+    server.listen(PORT,() => {
+    console.log(`server running on address http://localhost:${PORT}`);
+});
