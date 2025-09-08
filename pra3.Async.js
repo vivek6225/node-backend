@@ -14,3 +14,4 @@ fs.readFile('user-details.txt', 'utf8', (err, dataAsync) => {
 });
 console.log('5. End of script');
 
+
