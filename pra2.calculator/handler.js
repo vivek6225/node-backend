@@ -31,6 +31,7 @@ const requestHandler = (req, res) =>{
       </body>
       </html>
       `);
+      
       return res.end();
   } else if (req.url.toLowerCase() ==="/calculator-result" &&
     req.method ==='POST'){
