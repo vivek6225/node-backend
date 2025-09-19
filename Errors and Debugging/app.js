@@ -12,6 +12,8 @@ const server = http.createServer((req, res) =>{
 
    // Call the function from syntax.js
   testingSyntax();
+   runtime();
+   logical;
 });
 
 // Define the port number
